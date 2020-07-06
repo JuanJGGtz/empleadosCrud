@@ -1,7 +1,6 @@
     {{ $Modo == 'crear' ? 'Agregar empleado':'Modificar empleado'}}
     <label for="nombre">{{'Nombre'}}</label>
-    <input type="text" name="nombre" id="Nombre" >
-    
+    <input type="text" name="nombre" id="Nombre" value="{{isset($empleado->nombre)?$empleado->nombre:''}}">
     <br>
     <label for="ApellidoPaterno">{{'Apellido Paterno'}}</label>
     <input type="text" name="apellido_paterno" id="apellido_paterno">
