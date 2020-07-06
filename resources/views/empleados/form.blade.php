@@ -1,8 +1,7 @@
     {{ $Modo == 'crear' ? 'Agregar empleado':'Modificar empleado'}}
     <label for="nombre">{{'Nombre'}}</label>
-    <input type="text" name="nombre" id="Nombre" 
-    value="{{isset($empleado->nombre)?$empleado->nombre:''}}">
-    <!--Agregamos el value  que pregunta si eempleado en el campo nombre tiene un valor y lo pone en caso contrario coloca el campo nombre en vacio-->
+    <input type="text" name="nombre" id="Nombre" >
+    
     <br>
     <label for="ApellidoPaterno">{{'Apellido Paterno'}}</label>
     <input type="text" name="apellido_paterno" id="apellido_paterno">
