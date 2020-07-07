@@ -37,8 +37,10 @@ Route::get('/', function () {
 
 # - FORMA 3 -
 # de esta manera creamos los routes para todas nuestras funciones (update, create , delete etc)
-Route::resource('empleados', 'EmpleadosController');
+Route::resource('empleados', 'EmpleadosController')->middleware('auth');
+# ->middleware('auth') Para permitirle accesar al usuario a las rutas, solo si está registrado
+#Parte de Auth
 
 Auth::routes(['register'=>false,'reset'=>false]);//desactivamos el registro y el reset password
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'EmpleadosController@index')->name('home');

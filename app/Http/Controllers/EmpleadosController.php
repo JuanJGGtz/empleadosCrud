@@ -41,18 +41,18 @@ class EmpleadosController extends Controller
      */
     public function store(Request $request)
     {
-        //Aplicacion de las validaciones
-        $campos=[
-            'nombre'=>'required|string|max:100',
-            'apellido_paterno'=>'required|string|max:100',
-            'apellido_materno'=>'required|string|max:100',
-            'edad'=>'required|numeric|max:80|min:20',
-            'correo'=>'required|email',
-            'foto'=>'required|max:10000|mimes:jpeg,jpg,png'
+        //Aplicacion de las validaciones Modificar el mensaje \resources\lang\en\validation.php
+        $campos = [
+            'nombre' => 'required|string|alpha|max:30',
+            'apellido_paterno' => 'required|alpha|string|max:30',
+            'apellido_materno' => 'required|alpha|string|max:30',
+            'edad' => 'required|numeric|max:100|min:18',
+            'correo' => 'required|email',
+            'foto' => 'required|max:10000|mimes:jpeg,jpg,png'
         ];
 
-        $Mensaje=["required"=>'Campo :attribute es requerido'];
-        $this->validate($request,$campos,$Mensaje);
+        $Mensaje = ["required" => 'Campo, :attribute es requerido.'];
+        $this->validate($request, $campos, $Mensaje);
 
         //(Importante)Creamos una variable ($datosEmpleado) que va almacenar toda la informacion que se reciba del metodo Store)
         $datosEmpleado = request()->all();
@@ -95,7 +95,7 @@ class EmpleadosController extends Controller
         // me devuelve toda la información con respecto a ese id
         $empleado = Empleados::findOrFail($id);
 
-        return view("empleados.edit",compact("empleado"));
+        return view("empleados.edit", compact("empleado"));
         //enviamos la información del empleado atraves de la vista
         //return redirect("empleados")->with('Mensaje', 'Empleado actualizado con éxito');
     }
@@ -109,6 +109,22 @@ class EmpleadosController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Aplicacion de las validaciones PARA UPDATE 
+        $campos = [
+            'nombre' => 'required|string|alpha|max:30',
+            'apellido_paterno' => 'required|alpha|string|max:30',
+            'apellido_materno' => 'required|alpha|string|max:30',
+            'edad' => 'required|numeric|max:100|min:18',
+            'correo' => 'required|email'
+        ];
+        //(Importante) Preguntamos si existe una foto y despues concatenamos su validación
+        if ($request->hasFile("foto")) {
+            $campos += [
+                'foto' => 'required|max:10000|mimes:jpeg,jpg,png'
+            ];
+        }
+        $Mensaje = ["required" => 'Campo, :attribute es requerido.'];
+        $this->validate($request, $campos, $Mensaje);
         //
         $datosEmpleado = request()->except(['_token', '_method']);
 

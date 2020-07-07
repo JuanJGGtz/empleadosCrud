@@ -3,14 +3,18 @@
 @section('content')
 
 <div class="container">
-<!--Validación  23  -->    
+<!--Validación  23 -->    
 @if(count($errors)>0)
 <div class="alert alert-danger" role="alert">
-    <ul>
+        Porfavor, rellene correctamente los campos requeridos.
+    <!--<ul>
+        Porfavor, rellene correctamente los campos requeridos.
+        
+        #Mostramos una lista con lor errores    
         @foreach($errors->all() as $error)
         <li>{{$error}}</li>
         @endforeach
-    </ul>
+    </ul>-->
 </div>
 @endif
 <!--Validación-->    
