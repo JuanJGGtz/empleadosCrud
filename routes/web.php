@@ -14,7 +14,7 @@
 use App\Http\Controllers\EmpleadosController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 # - FORMA 1 -
 #Podemos observar la ruta que debe ser escrita en nuestro navegador
@@ -38,3 +38,7 @@ Route::get('/', function () {
 # - FORMA 3 -
 # de esta manera creamos los routes para todas nuestras funciones (update, create , delete etc)
 Route::resource('empleados', 'EmpleadosController');
+
+Auth::routes(['register'=>false,'reset'=>false]);//desactivamos el registro y el reset password
+
+Route::get('/home', 'HomeController@index')->name('home');
